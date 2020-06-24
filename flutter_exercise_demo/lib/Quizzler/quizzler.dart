@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'question-brain.dart';
+import 'question_brain.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 // Quizzler Page
@@ -42,34 +42,34 @@ class _QuizPageState extends State<QuizPage> {
       ),
     ),
     titleStyle: TextStyle(
-      color: Colors.red,
+      color: Colors.white,
+      backgroundColor: Colors.red
     ),
   );
 
   void checkAnswer(bool userCheckAnswer) {
-    bool isFinished = questionBrain.isFinished();
-    print("isFinished = $isFinished");
-    if (isFinished) {
+    if (questionBrain.isFinished() == true) {
       Alert(
         context: context,
         type: AlertType.warning,
-        title: "Warning",
+        title: "Finished",
         desc: "you've reached the end of the quiz",
         buttons: [
           DialogButton(
             child: Text(
-              "OK OKOK",
+              "OK",
               style: TextStyle(color: Colors.red, fontSize: 18),
             ),
             onPressed: () {
               questionBrain.reset();
+              scoreKeeper = [];
             },
             width: 120,
           )
         ],
       ).show();
-
     } else {
+
       bool correntAnswer = questionBrain.getCorrentAnswer();
       if (correntAnswer == userCheckAnswer) {
         scoreKeeper.add(
